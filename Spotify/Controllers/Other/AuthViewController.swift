@@ -32,6 +32,7 @@ class AuthViewController: UIViewController {
         guard let url = AuthManager.shared.signInURL else {
             return
         }
+        print(url)
         webView.load(URLRequest(url: url))
     }
     
@@ -51,7 +52,13 @@ class AuthViewController: UIViewController {
             return
         }
         
-        print("Code: \(code)")
+        webView.isHidden = true
+        AuthManager.shared.exchangeCodeForToken(code: code, completion: { [weak self] success in
+            DispatchQueue.main.async {
+                self?.navigationController?.popToRootViewController(animated: true)
+                self?.completionHandler?(success)
+            }
+        })
     }
 }
 

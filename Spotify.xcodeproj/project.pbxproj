@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AC1DF6E2C56CCAC003F0788 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC1DF6D2C56CCAC003F0788 /* AuthResponse.swift */; };
 		3AE199582C4FCCB6006AE3F5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE199572C4FCCB6006AE3F5 /* Extensions.swift */; };
 		3AF67F582C4DC1E600F0695F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF67F572C4DC1E600F0695F /* AppDelegate.swift */; };
 		3AF67F5A2C4DC1E600F0695F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF67F592C4DC1E600F0695F /* SceneDelegate.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3AC1DF6D2C56CCAC003F0788 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		3AE199572C4FCCB6006AE3F5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3AF67F542C4DC1E600F0695F /* Spotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF67F572C4DC1E600F0695F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				3AF67F902C4DC4EF00F0695F /* AudioTrack.swift */,
 				3AF67F922C4DC4F700F0695F /* Artist.swift */,
 				3AF67F942C4DC50600F0695F /* UserProfile.swift */,
+				3AC1DF6D2C56CCAC003F0788 /* AuthResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				3AF67F8D2C4DC4BB00F0695F /* HapticsManager.swift in Sources */,
 				3AF67F812C4DC45D00F0695F /* ProfileViewController.swift in Sources */,
 				3AF67F722C4DC3DC00F0695F /* TabBarViewController.swift in Sources */,
+				3AC1DF6E2C56CCAC003F0788 /* AuthResponse.swift in Sources */,
 				3AF67F912C4DC4EF00F0695F /* AudioTrack.swift in Sources */,
 				3AF67F5C2C4DC1E600F0695F /* HomeViewController.swift in Sources */,
 				3AF67F7A2C4DC43300F0695F /* AuthViewController.swift in Sources */,
