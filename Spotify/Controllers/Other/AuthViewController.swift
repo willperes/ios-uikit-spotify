@@ -32,7 +32,6 @@ class AuthViewController: UIViewController {
         guard let url = AuthManager.shared.signInURL else {
             return
         }
-        print(url)
         webView.load(URLRequest(url: url))
     }
     

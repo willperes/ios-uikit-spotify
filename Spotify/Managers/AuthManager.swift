@@ -10,6 +10,8 @@ import Foundation
 final class AuthManager {
     static let shared = AuthManager()
     
+    private var refreshingToken = false
+    
     struct Constants {
         static let clientID = "CLIENT_ID"
         static let clientSecret = "CLIENT_SECRET"
@@ -110,7 +112,36 @@ final class AuthManager {
         task.resume()
     }
     
+    private var onRefreshBlocks: [(String) -> Void] = []
+    
+    /// Supplies valid token to be used with API calls
+    public func withValidToken(completion: @escaping (String) -> Void) {
+        guard !refreshingToken else {
+            onRefreshBlocks.append(completion)
+            return
+        }
+        
+        if shouldRefreshToken {
+            // Refresh
+            refreshTokenIfNeeded { [weak self] success in
+                if success, let token = self?.accessToken {
+                    completion(token)
+                }
+            }
+                
+            return
+        }
+        
+        if let token = accessToken {
+            completion(token)
+        }
+    }
+    
     public func refreshTokenIfNeeded(completion: @escaping (Bool) -> Void) {
+        guard !refreshingToken else {
+            return
+        }
+        
         guard shouldRefreshToken else {
             completion(true)
             return
@@ -124,6 +155,8 @@ final class AuthManager {
         guard let url = URL(string: Constants.tokenAPIURL) else {
             return
         }
+        
+        refreshingToken = true
         
         var components = URLComponents()
         components.queryItems = [
@@ -147,6 +180,7 @@ final class AuthManager {
         request.httpBody = components.query?.data(using: .utf8)
         
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
+            self?.refreshingToken = false
             guard let data = data, error == nil else {
                 completion(false)
                 return
@@ -154,6 +188,8 @@ final class AuthManager {
             
             do {
                 let result = try JSONDecoder().decode(AuthResponse.self, from: data)
+                self?.onRefreshBlocks.forEach { $0(result.access_token) }
+                self?.onRefreshBlocks.removeAll()
                 self?.cacheToken(result: result)
                 completion(true)
             } catch {
