@@ -37,13 +37,12 @@ class WelcomeViewController: UIViewController {
     }
     
     @objc func didTapSignIn() {
-        let vc = AuthViewController()
-        
-        vc.completionHandler = { [weak self] success in
+        let authCompletionHandler = { [weak self] success in
             DispatchQueue.main.async {
                 self?.handleSignIn(success: success)
             }
         }
+        let vc = AuthViewControllerFactory.create(authCompletionHandler: authCompletionHandler)
         
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)

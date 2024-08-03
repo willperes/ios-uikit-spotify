@@ -15,10 +15,10 @@ class HomeViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(didTapSettings))
     }
-                                                            
+    
     @objc func didTapSettings() {
-        let vc = ProfileViewController()
-        vc.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(vc, animated: true)
+        let profileVC = ProfileViewControllerFactory.create()
+        profileVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(profileVC, animated: true)
     }
 }

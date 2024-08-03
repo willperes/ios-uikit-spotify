@@ -9,6 +9,19 @@ import UIKit
 import WebKit
 
 class AuthViewController: UIViewController {
+    private let viewModel: AuthViewModelProtocol?
+    private let authCompletionHandler: ((Bool) -> Void)?
+    
+    init(viewModel: AuthViewModelProtocol, authCompletionHandler: @escaping (_ success: Bool) -> Void) {
+        self.viewModel = viewModel
+        self.authCompletionHandler = authCompletionHandler
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let webView: WKWebView = {
         let prefs = WKWebpagePreferences()
         prefs.allowsContentJavaScript = true
@@ -17,8 +30,6 @@ class AuthViewController: UIViewController {
         let webView = WKWebView(frame: .zero, configuration: config)
         return webView
     }()
-    
-    public var completionHandler: ((Bool) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +40,7 @@ class AuthViewController: UIViewController {
         webView.navigationDelegate = self
         view.addSubview(webView)
         
-        guard let url = AuthManager.shared.signInURL else {
+        guard let url = viewModel?.fetchSignInURL() else {
             return
         }
         webView.load(URLRequest(url: url))
@@ -52,15 +63,13 @@ class AuthViewController: UIViewController {
         }
         
         webView.isHidden = true
-        AuthManager.shared.exchangeCodeForToken(code: code, completion: { [weak self] success in
+        viewModel?.handleCodeExchange(code) { [weak self] success in
             DispatchQueue.main.async {
                 self?.navigationController?.popToRootViewController(animated: true)
-                self?.completionHandler?(success)
+                self?.authCompletionHandler?(success)
             }
-        })
+        }
     }
 }
 
-extension AuthViewController: WKNavigationDelegate {
-    
-}
+extension AuthViewController: WKNavigationDelegate {}
