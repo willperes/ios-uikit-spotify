@@ -11,11 +11,9 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .systemBackground
-        tabBar.standardAppearance = appearance
-        tabBar.scrollEdgeAppearance = tabBar.standardAppearance
+        let tabBarAppearence = UITabBarAppearance()
+        tabBarAppearence.configureWithDefaultBackground()
+        tabBar.scrollEdgeAppearance = tabBarAppearence
         
         let homeVC = HomeViewController()
         let searchVC = SearchViewController()
