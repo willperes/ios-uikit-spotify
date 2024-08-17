@@ -258,7 +258,6 @@
 				3A3FABAC2C5EADD300942557 /* Features */,
 				3AF67F702C4DC25600F0695F /* Resources */,
 				3AF67F6F2C4DC24E00F0695F /* Managers */,
-				3AF67F6E2C4DC24100F0695F /* ViewModels */,
 				3AF67F6D2C4DC23600F0695F /* Models */,
 				3AF67F6C2C4DC22F00F0695F /* Views */,
 				3AF67F6B2C4DC22700F0695F /* Controllers */,
@@ -293,13 +292,6 @@
 				3AC1DF6D2C56CCAC003F0788 /* AuthResponse.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		3AF67F6E2C4DC24100F0695F /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		3AF67F6F2C4DC24E00F0695F /* Managers */ = {
